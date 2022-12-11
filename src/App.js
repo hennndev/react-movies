@@ -1,25 +1,51 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import Navbar from './components/UI/Navbar'
+import Footer from './components/UI/Footer'
+import AnimesList from './pages/AnimesList'
+import MyFavorite from './pages/MyFavorite'
+import AnimeDetail from './pages/AnimeDetail'
+import { useData } from './context/appContext'
+import Animes from './components/Animes/Animes'
+import { Routes, Route } from 'react-router-dom'
+import styled, { ThemeProvider } from 'styled-components'
 
-function App() {
+const App = () => {
+
+  const { toggleTheme } = useData()
+
+  const darkTheme = {
+    body: '#181818',
+    text: '#fff',
+    link: '#59C1BD'
+  }
+
+  const lightTheme = {
+    body: '#fefefe',
+    text: '#222',
+    link: '#332FD0'
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <ThemeProvider theme={toggleTheme === 'light' ? lightTheme : darkTheme}>
+      <MainApp>
+        <Navbar/>
+        <Routes>   
+            <Route path="/" element={<AnimesList/>}/>
+            <Route path="/animes/:animeId" element={<AnimeDetail/>}/>
+            <Route path="/myfavorite" element={<MyFavorite/>}/>
+        </Routes>
+        <Footer/>
+      </MainApp>
+    </ThemeProvider>
+  )
 }
 
-export default App;
+
+const MainApp = styled.main`
+  min-height: 100vh;
+  padding-bottom: 20px;
+  background: ${({theme}) => theme.body};
+  transition: all 0.5s ease;
+`
+
+export default App
