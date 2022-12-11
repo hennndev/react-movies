@@ -10,7 +10,7 @@ const MyFavorite = () => {
 
 	const filteredFavoriteAnime = favoriteAnime.filter(anime => {
 		return anime.title.toLowerCase().includes(searchTem.toLowerCase()) ||
-		anime.ranking == +searchTem
+		anime.ranking === +searchTem
 	})
 
 	return (

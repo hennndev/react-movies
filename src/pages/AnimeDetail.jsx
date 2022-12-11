@@ -45,7 +45,7 @@ const AnimeDetail = () => {
 						<div className="genres">
 							Genres: {animeData.genres.map((genre, idx) => <span key={idx}>{genre}{idx !== animeData.genres.length - 1 && ','} {' '}</span>)}
 						</div>
-						<p>Link detail: <a href={animeData.link} target="_blank">{animeData.link}</a></p>
+						<p>Link detail: <a href={animeData.link} target="_blank" rel="noopener">{animeData.link}</a></p>
 						<p>Synopsis:</p>
 						<p className="synopsis">{animeData.synopsis ? animeData.synopsis : 'Synopsis not available'}</p>
 					</div>
